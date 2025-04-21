@@ -1,0 +1,415 @@
+// _global.scss
+// Globale Stile für das gesamte Projekt
+
+@import 'variables';
+@import 'reset';
+@import 'mixins';
+
+// Typografie-Feinabstimmung
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-family-headings);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
+    margin-bottom: var(--spacing-md);
+    color: var(--color-gray-900);
+}
+
+h1 {
+    font-size: var(--font-size-3xl);
+    margin-bottom: var(--spacing-lg);
+
+    @include respond-to('lg') {
+        font-size: var(--font-size-4xl);
+    }
+}
+
+h2 {
+    font-size: var(--font-size-2xl);
+
+    @include respond-to('lg') {
+        font-size: var(--font-size-3xl);
+    }
+}
+
+h3 {
+    font-size: var(--font-size-xl);
+
+    @include respond-to('lg') {
+        font-size: var(--font-size-2xl);
+    }
+}
+
+h4 {
+    font-size: var(--font-size-lg);
+
+    @include respond-to('lg') {
+        font-size: var(--font-size-xl);
+    }
+}
+
+h5 {
+    font-size: var(--font-size-md);
+
+    @include respond-to('lg') {
+        font-size: var(--font-size-lg);
+    }
+}
+
+h6 {
+    font-size: var(--font-size-sm);
+
+    @include respond-to('lg') {
+        font-size: var(--font-size-md);
+    }
+}
+
+p {
+    margin-bottom: var(--spacing-md);
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+// Container-Element für Content-Begrenzung
+.container {
+    width: 100%;
+    max-width: var(--container-max-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--spacing-md);
+    padding-right: var(--spacing-md);
+
+    @include respond-to('md') {
+        padding-left: var(--spacing-lg);
+        padding-right: var(--spacing-lg);
+    }
+}
+
+// Grid-System
+.grid {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-columns), 1fr);
+    gap: var(--grid-gap);
+}
+
+// Flex-Utilities
+.flex {
+    display: flex;
+
+    &-column {
+        flex-direction: column;
+    }
+
+    &-center {
+        align-items: center;
+        justify-content: center;
+    }
+
+    &-between {
+        justify-content: space-between;
+    }
+
+    &-wrap {
+        flex-wrap: wrap;
+    }
+}
+
+// Abstand-Utilities
+.mt {
+    &-xs {
+        margin-top: var(--spacing-xs);
+    }
+
+    &-sm {
+        margin-top: var(--spacing-sm);
+    }
+
+    &-md {
+        margin-top: var(--spacing-md);
+    }
+
+    &-lg {
+        margin-top: var(--spacing-lg);
+    }
+
+    &-xl {
+        margin-top: var(--spacing-xl);
+    }
+}
+
+.mb {
+    &-xs {
+        margin-bottom: var(--spacing-xs);
+    }
+
+    &-sm {
+        margin-bottom: var(--spacing-sm);
+    }
+
+    &-md {
+        margin-bottom: var(--spacing-md);
+    }
+
+    &-lg {
+        margin-bottom: var(--spacing-lg);
+    }
+
+    &-xl {
+        margin-bottom: var(--spacing-xl);
+    }
+}
+
+.mx {
+    &-auto {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+.py {
+    &-xs {
+        padding-top: var(--spacing-xs);
+        padding-bottom: var(--spacing-xs);
+    }
+
+    &-sm {
+        padding-top: var(--spacing-sm);
+        padding-bottom: var(--spacing-sm);
+    }
+
+    &-md {
+        padding-top: var(--spacing-md);
+        padding-bottom: var(--spacing-md);
+    }
+
+    &-lg {
+        padding-top: var(--spacing-lg);
+        padding-bottom: var(--spacing-lg);
+    }
+
+    &-xl {
+        padding-top: var(--spacing-xl);
+        padding-bottom: var(--spacing-xl);
+    }
+}
+
+.px {
+    &-xs {
+        padding-left: var(--spacing-xs);
+        padding-right: var(--spacing-xs);
+    }
+
+    &-sm {
+        padding-left: var(--spacing-sm);
+        padding-right: var(--spacing-sm);
+    }
+
+    &-md {
+        padding-left: var(--spacing-md);
+        padding-right: var(--spacing-md);
+    }
+
+    &-lg {
+        padding-left: var(--spacing-lg);
+        padding-right: var(--spacing-lg);
+    }
+
+    &-xl {
+        padding-left: var(--spacing-xl);
+        padding-right: var(--spacing-xl);
+    }
+}
+
+// Farb-Utilities
+@each $name, $color in ('primary': var(--color-primary),
+    'primary-light': var(--color-primary-light),
+    'primary-dark': var(--color-primary-dark),
+    'secondary': var(--color-secondary),
+    'secondary-light': var(--color-secondary-light),
+    'secondary-dark': var(--color-secondary-dark),
+    'white': var(--color-white),
+    'black': var(--color-black),
+    'gray-100': var(--color-gray-100),
+    'gray-200': var(--color-gray-200),
+    'gray-300': var(--color-gray-300),
+    'gray-400': var(--color-gray-400),
+    'gray-500': var(--color-gray-500),
+    'gray-600': var(--color-gray-600),
+    'gray-700': var(--color-gray-700),
+    'gray-800': var(--color-gray-800),
+    'gray-900': var(--color-gray-900),
+    'success': var(--color-success),
+    'info': var(--color-info),
+    'warning': var(--color-warning),
+    'danger': var(--color-danger)) {
+    .text-#{$name} {
+        color: #{$color};
+    }
+
+    .bg-#{$name} {
+        background-color: #{$color};
+    }
+
+    .border-#{$name} {
+        border-color: #{$color};
+    }
+}
+
+// Button-Stile
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--button-padding-y) var(--button-padding-x);
+    border-radius: var(--button-border-radius);
+    font-weight: var(--button-font-weight);
+    text-align: center;
+    transition: var(--button-transition);
+    border: var(--border-width) solid transparent;
+
+    &-primary {
+        background-color: var(--color-primary);
+        color: var(--color-white);
+
+        &:hover,
+        &:focus {
+            background-color: var(--color-primary-dark);
+            text-decoration: none;
+        }
+    }
+
+    &-secondary {
+        background-color: var(--color-secondary);
+        color: var(--color-white);
+
+        &:hover,
+        &:focus {
+            background-color: var(--color-secondary-dark);
+            text-decoration: none;
+        }
+    }
+
+    &-outline-primary {
+        border-color: var(--color-primary);
+        color: var(--color-primary);
+
+        &:hover,
+        &:focus {
+            background-color: var(--color-primary);
+            color: var(--color-white);
+            text-decoration: none;
+        }
+    }
+
+    &-outline-secondary {
+        border-color: var(--color-secondary);
+        color: var(--color-secondary);
+
+        &:hover,
+        &:focus {
+            background-color: var(--color-secondary);
+            color: var(--color-white);
+            text-decoration: none;
+        }
+    }
+
+    &-sm {
+        padding: calc(var(--button-padding-y) / 2) calc(var(--button-padding-x) / 1.5);
+        font-size: var(--font-size-sm);
+    }
+
+    &-lg {
+        padding: calc(var(--button-padding-y) * 1.5) calc(var(--button-padding-x) * 1.5);
+        font-size: var(--font-size-lg);
+    }
+}
+
+// Card-Komponente
+.card {
+    background-color: var(--color-white);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    transition: box-shadow var(--transition-speed-normal) var(--transition-timing),
+        transform var(--transition-speed-normal) var(--transition-timing);
+
+    &:hover {
+        box-shadow: var(--shadow-md);
+        transform: translateY(-2px);
+    }
+
+    &-body {
+        padding: var(--spacing-lg);
+    }
+
+    &-header {
+        padding: var(--spacing-md) var(--spacing-lg);
+        border-bottom: var(--border-width) solid var(--color-gray-200);
+    }
+
+    &-footer {
+        padding: var(--spacing-md) var(--spacing-lg);
+        border-top: var(--border-width) solid var(--color-gray-200);
+    }
+}
+
+// Utility-Klassen für versteckte Elemente
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+// Allgemeine Animationsklassen
+.fade-in {
+    animation: fadeIn var(--transition-speed-normal) var(--transition-timing);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+// Dunkelmodus-Support
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-gray-900: #{$color-gray-100};
+        --color-gray-800: #{$color-gray-200};
+        --color-gray-700: #{$color-gray-300};
+        --color-gray-600: #{$color-gray-400};
+        --color-gray-500: #{$color-gray-500};
+        --color-gray-400: #{$color-gray-600};
+        --color-gray-300: #{$color-gray-700};
+        --color-gray-200: #{$color-gray-800};
+        --color-gray-100: #{$color-gray-900};
+
+        --color-white: #121212;
+        --color-black: #{$color-white};
+    }
+
+    body {
+        background-color: var(--color-gray-900);
+        color: var(--color-gray-100);
+    }
+
+    .card {
+        background-color: var(--color-gray-800);
+    }
+}

@@ -1,0 +1,20 @@
+# Global für beide Ordner
+node_modules/
+.env
+.env.local
+.env.*.local
+
+# Logs
+logs
+*.log
+
+# Editor- und Systemdateien
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+*.swp

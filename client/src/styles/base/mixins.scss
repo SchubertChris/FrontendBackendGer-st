@@ -1,0 +1,633 @@
+// _mixins.scss
+// Umfassende Sammlung moderner und nützlicher SCSS-Mixins für das Projekt
+
+// ============================================================
+// RESPONSIVE & LAYOUT MIXINS
+// ============================================================
+
+// Media Queries Breakpoint-Mixin
+@mixin respond-to($breakpoint) {
+    @if $breakpoint =='xs' {
+        @media (min-width: $breakpoint-xs) {
+            @content;
+        }
+    }
+
+    @else if $breakpoint =='sm' {
+        @media (min-width: $breakpoint-sm) {
+            @content;
+        }
+    }
+
+    @else if $breakpoint =='md' {
+        @media (min-width: $breakpoint-md) {
+            @content;
+        }
+    }
+
+    @else if $breakpoint =='lg' {
+        @media (min-width: $breakpoint-lg) {
+            @content;
+        }
+    }
+
+    @else if $breakpoint =='xl' {
+        @media (min-width: $breakpoint-xl) {
+            @content;
+        }
+    }
+
+    @else if $breakpoint =='2xl' {
+        @media (min-width: $breakpoint-2xl) {
+            @content;
+        }
+    }
+
+    @else if $breakpoint =='dark-mode' {
+        @media (prefers-color-scheme: dark) {
+            @content;
+        }
+    }
+
+    @else if $breakpoint =='light-mode' {
+        @media (prefers-color-scheme: light) {
+            @content;
+        }
+    }
+
+    @else if $breakpoint =='reduced-motion' {
+        @media (prefers-reduced-motion: reduce) {
+            @content;
+        }
+    }
+
+    @else if $breakpoint =='print' {
+        @media print {
+            @content;
+        }
+    }
+
+    @else if $breakpoint =='hover' {
+        @media (hover: hover) {
+            @content;
+        }
+    }
+
+    @else if $breakpoint =='touch' {
+        @media (hover: none) {
+            @content;
+        }
+    }
+
+    @else if $breakpoint =='landscape' {
+        @media (orientation: landscape) {
+            @content;
+        }
+    }
+
+    @else if $breakpoint =='portrait' {
+        @media (orientation: portrait) {
+            @content;
+        }
+    }
+
+    @else if $breakpoint =='retina' {
+        @media (min-resolution: 2dppx) {
+            @content;
+        }
+    }
+}
+
+// Max-Width Media Queries
+@mixin respond-down($breakpoint) {
+    @if $breakpoint =='xs' {
+        @media (max-width: #{$breakpoint-xs - 1px}) {
+            @content;
+        }
+    }
+
+    @else if $breakpoint =='sm' {
+        @media (max-width: #{ $breakpoint-sm - 1px }) {
+            @content;
+        }
+    }
+
+    @else if $breakpoint =='md' {
+        @media (max-width: #{$breakpoint-md - 1px}) {
+            @content;
+        }
+    }
+
+    @else if $breakpoint =='lg' {
+        @media (max-width: #{$breakpoint-lg - 1px}) {
+            @content;
+        }
+    }
+
+    @else if $breakpoint =='xl' {
+        @media (max-width: #{$breakpoint-xl - 1px}) {
+            @content;
+        }
+    }
+
+    @else if $breakpoint =='2xl' {
+        @media (max-width: #{$breakpoint-2xl - 1p}x) {
+            @content;
+        }
+    }
+}
+
+// Between Breakpoints Media Queries
+@mixin respond-between($min, $max) {
+    $min-width: null;
+    $max-width: null;
+
+    @if $min =='xs' {
+        $min-width: $breakpoint-xs;
+    }
+
+    @else if $min =='sm' {
+        $min-width: $breakpoint-sm;
+    }
+
+    @else if $min =='md' {
+        $min-width: $breakpoint-md;
+    }
+
+    @else if $min =='lg' {
+        $min-width: $breakpoint-lg;
+    }
+
+    @else if $min =='xl' {
+        $min-width: $breakpoint-xl;
+    }
+
+    @else if $min =='2xl' {
+        $min-width: $breakpoint-2xl;
+    }
+
+    @if $max =='xs' {
+        $max-width: $breakpoint-xs - 1px;
+    }
+
+    @else if $max =='sm' {
+        $max-width: $breakpoint-sm - 1px;
+    }
+
+    @else if $max =='md' {
+        $max-width: $breakpoint-md - 1px;
+    }
+
+    @else if $max =='lg' {
+        $max-width: $breakpoint-lg - 1px;
+    }
+
+    @else if $max =='xl' {
+        $max-width: $breakpoint-xl - 1px;
+    }
+
+    @else if $max =='2xl' {
+        $max-width: $breakpoint-2xl - 1px;
+    }
+
+    @if $min-width and $max-width {
+        @media (min-width: $min-width) and (max-width: $max-width) {
+            @content;
+        }
+    }
+}
+
+// Container mit responsivem Padding
+@mixin container($max-width: $container-max-width) {
+    width: 100%;
+    max-width: $max-width;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: $spacing-md;
+    padding-right: $spacing-md;
+
+    @include respond-to('md') {
+        padding-left: $spacing-lg;
+        padding-right: $spacing-lg;
+    }
+}
+
+// Flexbox Einstellungen
+@mixin flex($direction: row, $justify: flex-start, $align: stretch, $wrap: nowrap, $gap: null) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+    flex-wrap: $wrap;
+
+    @if $gap {
+        gap: $gap;
+    }
+}
+
+// CSS Grid mit responsiven Spalten
+@mixin grid($columns: 1, $gap: $grid-gap) {
+    display: grid;
+    grid-template-columns: repeat($columns, 1fr);
+    gap: $gap;
+}
+
+// Automatisch anpassendes responsives Grid
+@mixin auto-grid($min-size: 250px, $gap: $grid-gap) {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax($min-size, 1fr));
+    gap: $gap;
+}
+
+// Grid-Bereich definieren
+@mixin grid-area($row-start, $column-start, $row-end: null, $column-end: null) {
+    grid-row-start: $row-start;
+    grid-column-start: $column-start;
+
+    @if $row-end {
+        grid-row-end: $row-end;
+    }
+
+    @if $column-end {
+        grid-column-end: $column-end;
+    }
+}
+
+// Responsives Grid-System mit benannten Grid-Bereichen
+@mixin named-grid($areas, $columns, $rows, $gap: $grid-gap) {
+    display: grid;
+    grid-template-areas: $areas;
+    grid-template-columns: $columns;
+    grid-template-rows: $rows;
+    gap: $gap;
+}
+
+// CSS Grid-Spalten Helper
+@mixin grid-columns($class, $columns) {
+    @for $i from 1 through $columns {
+        .#{$class}-#{$i} {
+            grid-column: span $i;
+        }
+    }
+}
+
+// Responsives Grid-System
+@mixin responsive-grid($columns: 12) {
+    @include grid-columns('col', $columns);
+
+    @include respond-to('sm') {
+        @include grid-columns('col-sm', $columns);
+    }
+
+    @include respond-to('md') {
+        @include grid-columns('col-md', $columns);
+    }
+
+    @include respond-to('lg') {
+        @include grid-columns('col-lg', $columns);
+    }
+
+    @include respond-to('xl') {
+        @include grid-columns('col-xl', $columns);
+    }
+}
+
+// Responsive Utility Classes Generator
+@mixin responsive-utils($property, $class, $values...) {
+    @each $breakpoint, $prefix in ('default': '',
+        'sm': 'sm:',
+        'md': 'md:',
+        'lg': 'lg:',
+        'xl': 'xl:'
+
+    ) {
+        @if $breakpoint =='default' {
+            @each $name, $value in $values {
+                .#{$class}-#{$name} {
+                    #{$property}: $value;
+                }
+            }
+        }
+
+        @else {
+            @include respond-to($breakpoint) {
+                @each $name, $value in $values {
+                    .#{$prefix}#{$class}-#{$name} {
+                        #{$property}: $value;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Masonry Layout
+@mixin masonry-grid($columns: 3, $gap: $grid-gap) {
+    column-count: 1;
+    column-gap: $gap;
+
+    @include respond-to('sm') {
+        column-count: 2;
+    }
+
+    @include respond-to('md') {
+        column-count: $columns;
+    }
+
+    >* {
+        break-inside: avoid;
+        margin-bottom: $gap;
+    }
+}
+
+// ============================================================
+// POSITIONING & LAYOUT MIXINS
+// ============================================================
+
+// Absolute Positionierung
+@mixin absolute($top: null, $right: null, $bottom: null, $left: null) {
+    position: absolute;
+    top: $top;
+    right: $right;
+    bottom: $bottom;
+    left: $left;
+}
+
+// Fixed Positionierung
+@mixin fixed($top: null, $right: null, $bottom: null, $left: null) {
+    position: fixed;
+    top: $top;
+    right: $right;
+    bottom: $bottom;
+    left: $left;
+}
+
+// Sticky Positionierung
+@mixin sticky($top: 0, $z-index: $z-index-sticky) {
+    position: sticky;
+    top: $top;
+    z-index: $z-index;
+}
+
+// Zentrieren mit absolute positioning
+@mixin absolute-center($position: 'both') {
+    position: absolute;
+
+    @if $position =='both' {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    @else if $position =='vertical' {
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    @else if $position =='horizontal' {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+// Zentrieren mit Flex
+@mixin flex-center($direction: row) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: center;
+    align-items: center;
+}
+
+// Zentrieren mit Grid
+@mixin grid-center {
+    display: grid;
+    place-items: center;
+}
+
+// Pseudo-Elemente mit Inhalt
+@mixin pseudo($display: block, $pos: absolute, $content: '') {
+    content: $content;
+    display: $display;
+    position: $pos;
+}
+
+// Full-Screen Element
+@mixin fullscreen($position: fixed) {
+    position: $position;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+// Aspect Ratio Box mit moderner CSS
+@mixin aspect-ratio($width: 16, $height: 9) {
+    aspect-ratio: $width / $height;
+
+    // Fallback für Browser ohne aspect-ratio Support
+    @supports not (aspect-ratio: 1 / 1) {
+        position: relative;
+
+        &::before {
+            content: '';
+            display: block;
+            padding-top: ($height / $width) * 100%;
+        }
+
+        >* {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
+
+// Size Mixin (width und height)
+@mixin size($width, $height: $width) {
+    width: $width;
+    height: $height;
+}
+
+// ============================================================
+// STYLING & EFFECTS MIXINS
+// ============================================================
+
+// Anpassbare Schattenstile
+@mixin shadow($level: 'md', $hover: false) {
+    @if $level =='none' {
+        box-shadow: none;
+    }
+
+    @else if $level =='sm' {
+        box-shadow: $shadow-sm;
+    }
+
+    @else if $level =='md' {
+        box-shadow: $shadow-md;
+    }
+
+    @else if $level =='lg' {
+        box-shadow: $shadow-lg;
+    }
+
+    @else if $level =='xl' {
+        box-shadow: $shadow-xl;
+    }
+
+    @else if $level =='inner' {
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    @if $hover {
+        transition: box-shadow $transition-speed-normal $transition-timing;
+
+        &:hover {
+            @if $level =='sm' {
+                box-shadow: $shadow-md;
+            }
+
+            @else if $level =='md' {
+                box-shadow: $shadow-lg;
+            }
+
+            @else if $level =='lg' {
+                box-shadow: $shadow-xl;
+            }
+
+            @else if $level =='xl' {
+                box-shadow: $shadow-xl, 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            }
+        }
+    }
+}
+
+// Glasmorphismus-Effekt
+@mixin glass-effect($opacity: 0.1, $blur: 10px, $border: true) {
+    background-color: rgba(255, 255, 255, $opacity);
+    backdrop-filter: blur($blur);
+    -webkit-backdrop-filter: blur($blur);
+
+    @if $border {
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    // Fallback für Browser ohne backdrop-filter
+    @supports not (backdrop-filter: blur(1px)) {
+        background-color: rgba(255, 255, 255, 0.8);
+    }
+}
+
+// Dark Mode Glass Effect
+@mixin dark-glass-effect($opacity: 0.1, $blur: 10px, $border: true) {
+    background-color: rgba(0, 0, 0, $opacity);
+    backdrop-filter: blur($blur);
+    -webkit-backdrop-filter: blur($blur);
+
+    @if $border {
+        border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    // Fallback für Browser ohne backdrop-filter
+    @supports not (backdrop-filter: blur(1px)) {
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+}
+
+// Neomorphismus-Effekt
+@mixin neumorphic($color: $color-gray-100, $intensity: 0.1, $type: 'flat', $radius: 15px) {
+    background-color: $color;
+    border-radius: $radius;
+
+    @if $type =='flat' {
+        box-shadow:
+            5px 5px 10px rgba(0, 0, 0, $intensity),
+            -5px -5px 10px rgba(255, 255, 255, $intensity);
+    }
+
+    @else if $type =='pressed' {
+        box-shadow:
+            inset 2px 2px 5px rgba(0, 0, 0, $intensity),
+            inset -2px -2px 5px rgba(255, 255, 255, $intensity);
+    }
+
+    @else if $type =='concave' {
+        background: linear-gradient(145deg, darken($color, 5%), lighten($color, 5%));
+        box-shadow:
+            5px 5px 10px rgba(0, 0, 0, $intensity),
+            -5px -5px 10px rgba(255, 255, 255, $intensity);
+    }
+
+    @else if $type =='convex' {
+        background: linear-gradient(145deg, lighten($color, 5%), darken($color, 5%));
+        box-shadow:
+            5px 5px 10px rgba(0, 0, 0, $intensity),
+            -5px -5px 10px rgba(255, 255, 255, $intensity);
+    }
+
+    @else if $type =='drop' {
+        box-shadow:
+            5px 5px 10px rgba(0, 0, 0, $intensity);
+    }
+}
+
+// Gradient Hintergrund
+@mixin gradient($direction: 'to right', $colors...) {
+    background: linear-gradient(#{$direction}, $colors);
+}
+
+// Gradient Text
+@mixin gradient-text($gradient) {
+    background: $gradient;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+
+    // Fallback für Browser ohne background-clip
+    @supports not (background-clip: text) {
+        position: relative;
+        display: inline-block;
+        background: transparent;
+        position: relative;
+
+        &::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 2px;
+            background: currentColor;
+        }
+    }
+}
+
+// Custom Scrollbar
+@mixin custom-scrollbar($width: 8px, $track-color: $color-gray-200, $thumb-color: $color-gray-500) {
+    &::-webkit-scrollbar {
+        width: $width;
+        height: $width;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: $track-color;
+        border-radius: $width / 2;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: $thumb-color;
+        border-radius: $width / 2;
+
+        &:hover {
+            background: darken($thumb-color, 10%);
+        }
+    }
+
+    // Firefox Scrollbar
+    scrollbar-width: thin;
+    scrollbar-color: $thumb-color $track-color;
+}

@@ -1,50 +1,15 @@
 // Home.scss - Eigenständiges Styling für die CandleScope Trading-Plattform
-
-// Farbvariablen
-$primary-color: #4387F9;
-$secondary-color: #F9B543;
-$dark-blue: #1a1f2b;
-$white: #ffffff;
-$light-gray: #f5f7fa;
-$medium-gray: #e1e5eb;
-$dark-gray: #555;
-$darker-gray: #333;
-$green: #26de81;
-$red: #ff5e57;
-
-// Schatten
-$shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
-$shadow-md: 0 4px 8px rgba(0, 0, 0, 0.1);
-$shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.1);
-
-// Abstände
-$spacing-xs: 4px;
-$spacing-sm: 8px;
-$spacing-md: 16px;
-$spacing-lg: 24px;
-$spacing-xl: 32px;
-$spacing-2xl: 48px;
-$spacing-3xl: 64px;
-
-// Border-Radius
-$border-radius-sm: 4px;
-$border-radius-md: 8px;
-$border-radius-lg: 12px;
-$border-radius-xl: 16px;
-$border-radius-full: 9999px;
-
-// Übergänge
-$transition-fast: 0.2s ease;
-$transition-normal: 0.3s ease;
+@use "sass:color";
+@import '../base/variables.scss'; // Importiere die Variablen-Datei
 
 // Grundcontainer
 .home-container {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: $font-family-base;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background-color: $light-gray;
-    color: $dark-gray;
+    background-color: $color-gray-100;
+    color: $color-gray-700;
 }
 
 // Navigation
@@ -53,11 +18,11 @@ $transition-normal: 0.3s ease;
     justify-content: space-between;
     align-items: center;
     padding: $spacing-md $spacing-lg;
-    background-color: $white;
+    background-color: $color-white;
     box-shadow: $shadow-sm;
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: $z-index-sticky;
 }
 
 .home-logo {
@@ -67,9 +32,9 @@ $transition-normal: 0.3s ease;
 
     h1 {
         margin: 0;
-        font-size: 24px;
-        font-weight: 700;
-        background: linear-gradient(90deg, $primary-color, $secondary-color);
+        font-size: $font-size-xl;
+        font-weight: $font-weight-bold;
+        background: linear-gradient(90deg, $color-secondary, $color-primary);
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
@@ -84,11 +49,11 @@ $transition-normal: 0.3s ease;
 }
 
 .home-welcome-user {
-    color: $dark-gray;
-    font-size: 14px;
-    font-weight: 500;
+    color: $color-gray-700;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
 
-    @media (max-width: 768px) {
+    @media (max-width: $breakpoint-md) {
         display: none;
     }
 }
@@ -98,21 +63,21 @@ $transition-normal: 0.3s ease;
     align-items: center;
     gap: $spacing-xs;
     background-color: transparent;
-    border: 1px solid $medium-gray;
-    color: $dark-gray;
+    border: $border-width solid $color-gray-300;
+    color: $color-gray-700;
     padding: $spacing-xs $spacing-md;
     border-radius: $border-radius-full;
-    font-size: 14px;
-    font-weight: 500;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
     cursor: pointer;
-    transition: all $transition-fast;
+    transition: all $transition-speed-fast;
 
     svg {
-        transition: transform $transition-normal;
+        transition: transform $transition-speed-normal;
     }
 
     &:hover {
-        border-color: $dark-gray;
+        border-color: $color-gray-700;
         background-color: rgba(0, 0, 0, 0.05);
 
         svg {
@@ -125,11 +90,11 @@ $transition-normal: 0.3s ease;
 .home-main-content {
     flex: 1;
     padding: $spacing-xl $spacing-lg;
-    max-width: 1200px;
+    max-width: $container-max-width;
     margin: 0 auto;
     width: 100%;
 
-    @media (min-width: 768px) {
+    @media (min-width: $breakpoint-md) {
         padding: $spacing-xl $spacing-2xl;
     }
 }
@@ -141,7 +106,7 @@ $transition-normal: 0.3s ease;
     margin-bottom: $spacing-3xl;
     gap: $spacing-2xl;
 
-    @media (min-width: 992px) {
+    @media (min-width: $breakpoint-lg) {
         flex-direction: row;
         align-items: center;
         gap: $spacing-2xl;
@@ -152,21 +117,21 @@ $transition-normal: 0.3s ease;
     flex: 1;
 
     h2 {
-        font-size: 36px;
-        font-weight: 700;
+        font-size: $font-size-3xl;
+        font-weight: $font-weight-bold;
         margin-bottom: $spacing-md;
-        color: $darker-gray;
-        line-height: 1.2;
+        color: $color-gray-800;
+        line-height: $line-height-tight;
 
-        @media (min-width: 768px) {
-            font-size: 42px;
+        @media (min-width: $breakpoint-md) {
+            font-size: $font-size-4xl;
         }
     }
 
     p {
-        font-size: 16px;
-        line-height: 1.6;
-        color: $dark-gray;
+        font-size: $font-size-base;
+        line-height: $line-height-loose;
+        color: $color-gray-700;
         margin-bottom: $spacing-lg;
     }
 }
@@ -176,21 +141,21 @@ $transition-normal: 0.3s ease;
     flex-direction: column;
     gap: $spacing-md;
 
-    @media (min-width: 576px) {
+    @media (min-width: $breakpoint-sm) {
         flex-direction: row;
     }
 }
 
 .home-primary-button {
     padding: $spacing-md $spacing-xl;
-    background: linear-gradient(90deg, $primary-color, darken($primary-color, 10%));
+    background: linear-gradient(90deg, $color-secondary, color.adjust($color-secondary, $lightness: -10%));
     border: none;
-    color: $white;
+    color: $color-white;
     border-radius: $border-radius-lg;
-    font-weight: 600;
-    font-size: 16px;
+    font-weight: $font-weight-bold;
+    font-size: $font-size-base;
     cursor: pointer;
-    transition: all $transition-normal;
+    transition: all $transition-speed-normal;
     box-shadow: $shadow-md;
 
     &:hover {
@@ -206,18 +171,18 @@ $transition-normal: 0.3s ease;
 .home-secondary-button {
     padding: $spacing-md $spacing-xl;
     background-color: transparent;
-    border: 2px solid $medium-gray;
-    color: $dark-gray;
+    border: $border-width-md solid $color-gray-300;
+    color: $color-gray-700;
     border-radius: $border-radius-lg;
-    font-weight: 500;
-    font-size: 16px;
+    font-weight: $font-weight-medium;
+    font-size: $font-size-base;
     cursor: pointer;
-    transition: all $transition-normal;
+    transition: all $transition-speed-normal;
 
     &:hover {
-        border-color: $primary-color;
-        color: $primary-color;
-        background-color: rgba($primary-color, 0.05);
+        border-color: $color-secondary;
+        color: $color-secondary;
+        background-color: rgba($color-secondary, 0.05);
     }
 }
 
@@ -231,7 +196,7 @@ $transition-normal: 0.3s ease;
     box-shadow: $shadow-lg;
     margin: 0 auto;
 
-    @media (min-width: 768px) {
+    @media (min-width: $breakpoint-md) {
         height: 400px;
     }
 }
@@ -242,10 +207,10 @@ $transition-normal: 0.3s ease;
 
     h2 {
         text-align: center;
-        font-size: 28px;
-        font-weight: 700;
+        font-size: $font-size-2xl;
+        font-weight: $font-weight-bold;
         margin-bottom: $spacing-2xl;
-        color: $darker-gray;
+        color: $color-gray-800;
         position: relative;
 
         &::after {
@@ -256,7 +221,7 @@ $transition-normal: 0.3s ease;
             transform: translateX(-50%);
             width: 60px;
             height: 4px;
-            background: linear-gradient(90deg, $primary-color, $secondary-color);
+            background: linear-gradient(90deg, $color-secondary, $color-primary);
             border-radius: $border-radius-sm;
         }
     }
@@ -267,7 +232,7 @@ $transition-normal: 0.3s ease;
     flex-direction: column;
     gap: $spacing-lg;
 
-    @media (min-width: 768px) {
+    @media (min-width: $breakpoint-md) {
         flex-direction: row;
     }
 }
@@ -275,11 +240,11 @@ $transition-normal: 0.3s ease;
 .home-feature-card {
     flex: 1;
     padding: $spacing-xl;
-    background-color: $white;
+    background-color: $color-white;
     border-radius: $border-radius-lg;
     box-shadow: $shadow-sm;
-    transition: all $transition-normal;
-    border: 1px solid $medium-gray;
+    transition: all $transition-speed-normal;
+    border: $border-width solid $color-gray-300;
 
     &:hover {
         transform: translateY(-5px);
@@ -287,17 +252,17 @@ $transition-normal: 0.3s ease;
     }
 
     h3 {
-        font-size: 20px;
-        font-weight: 600;
+        font-size: $font-size-lg;
+        font-weight: $font-weight-bold;
         margin: $spacing-md 0;
-        color: $darker-gray;
+        color: $color-gray-800;
     }
 
     p {
-        font-size: 14px;
-        color: $dark-gray;
+        font-size: $font-size-sm;
+        color: $color-gray-700;
         margin: 0;
-        line-height: 1.6;
+        line-height: $line-height-loose;
     }
 }
 
@@ -307,9 +272,9 @@ $transition-normal: 0.3s ease;
     align-items: center;
     width: 60px;
     height: 60px;
-    background: linear-gradient(135deg, rgba($primary-color, 0.1), rgba($secondary-color, 0.1));
+    background: linear-gradient(135deg, rgba($color-secondary, 0.1), rgba($color-primary, 0.1));
     border-radius: $border-radius-full;
-    color: $primary-color;
+    color: $color-secondary;
     margin-bottom: $spacing-sm;
 }
 
@@ -318,11 +283,11 @@ $transition-normal: 0.3s ease;
     margin-top: auto;
     padding: $spacing-xl;
     text-align: center;
-    border-top: 1px solid $medium-gray;
+    border-top: $border-width solid $color-gray-300;
 
     p {
-        color: $dark-gray;
-        font-size: 14px;
+        color: $color-gray-700;
+        font-size: $font-size-sm;
         margin: 0;
     }
 }
@@ -330,22 +295,22 @@ $transition-normal: 0.3s ease;
 // Dunkelmodus
 @media (prefers-color-scheme: dark) {
     .home-container {
-        background-color: $dark-blue;
-        color: $light-gray;
+        background-color: $color-gray-900;
+        color: $color-gray-100;
     }
 
     .home-navbar {
-        background-color: lighten($dark-blue, 3%);
+        background-color: color.adjust($color-gray-900, $lightness: 3%);
         box-shadow: 0 1px 0 rgba(255, 255, 255, 0.05);
     }
 
     .home-welcome-user {
-        color: $light-gray;
+        color: $color-gray-100;
     }
 
     .home-logout-button {
         border-color: rgba(255, 255, 255, 0.2);
-        color: $light-gray;
+        color: $color-gray-100;
 
         &:hover {
             border-color: rgba(255, 255, 255, 0.4);
@@ -355,51 +320,51 @@ $transition-normal: 0.3s ease;
 
     .home-hero-content {
         h2 {
-            color: $white;
+            color: $color-white;
         }
 
         p {
-            color: darken($light-gray, 15%);
+            color: color.adjust($color-gray-100, $lightness: -15%);
         }
     }
 
     .home-secondary-button {
         border-color: rgba(255, 255, 255, 0.2);
-        color: $light-gray;
+        color: $color-gray-100;
 
         &:hover {
-            border-color: $primary-color;
-            color: $primary-color;
-            background-color: rgba($primary-color, 0.1);
+            border-color: $color-secondary;
+            color: $color-secondary;
+            background-color: rgba($color-secondary, 0.1);
         }
     }
 
     .home-feature-card {
-        background-color: lighten($dark-blue, 3%);
+        background-color: color.adjust($color-gray-900, $lightness: 3%);
         border-color: rgba(255, 255, 255, 0.05);
 
         h3 {
-            color: $white;
+            color: $color-white;
         }
 
         p {
-            color: darken($light-gray, 15%);
+            color: color.adjust($color-gray-100, $lightness: -15%);
         }
     }
 
     .home-feature-icon {
-        background: linear-gradient(135deg, rgba($primary-color, 0.2), rgba($secondary-color, 0.2));
+        background: linear-gradient(135deg, rgba($color-secondary, 0.2), rgba($color-primary, 0.2));
     }
 
     .home-features-section h2 {
-        color: $white;
+        color: $color-white;
     }
 
     .home-footer {
         border-top-color: rgba(255, 255, 255, 0.05);
 
         p {
-            color: darken($light-gray, 25%);
+            color: color.adjust($color-gray-100, $lightness: -25%);
         }
     }
 }

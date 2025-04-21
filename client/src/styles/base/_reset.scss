@@ -1,113 +1,21 @@
 // _reset.scss
-// Modernes CSS-Reset für optimale Browser-Kompatibilität und Konsistenz
+// Vereinfachtes CSS-Reset
 
-// Box-Sizing für alle Elemente
 *,
 *::before,
 *::after {
     box-sizing: border-box;
-}
-
-// Entfernen der Margins und Paddings
-html,
-body,
-div,
-span,
-applet,
-object,
-iframe,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-blockquote,
-pre,
-a,
-abbr,
-acronym,
-address,
-big,
-cite,
-code,
-del,
-dfn,
-em,
-img,
-ins,
-kbd,
-q,
-s,
-samp,
-small,
-strike,
-strong,
-sub,
-sup,
-tt,
-var,
-b,
-u,
-i,
-center,
-dl,
-dt,
-dd,
-ol,
-ul,
-li,
-fieldset,
-form,
-label,
-legend,
-table,
-caption,
-tbody,
-tfoot,
-thead,
-tr,
-th,
-td,
-article,
-aside,
-canvas,
-details,
-embed,
-figure,
-figcaption,
-footer,
-header,
-hgroup,
-menu,
-nav,
-output,
-ruby,
-section,
-summary,
-time,
-mark,
-audio,
-video {
     margin: 0;
     padding: 0;
-    border: 0;
-    font-size: 100%;
-    vertical-align: baseline;
 }
 
-// Verbesserte Lese-Einstellungen
 html {
     font-size: 16px;
     scroll-behavior: smooth;
-    -webkit-text-size-adjust: 100%;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
 }
 
-// Grundlegende Body-Einstellungen
 body {
     font-family: var(--font-family-base);
     font-size: var(--font-size-base);
@@ -115,11 +23,10 @@ body {
     color: var(--color-gray-900);
     background-color: var(--color-white);
     min-height: 100vh;
+    padding: 0;
 }
 
-// Verbesserte Medien-Behandlung
 img,
-picture,
 video,
 canvas,
 svg {
@@ -128,7 +35,6 @@ svg {
     height: auto;
 }
 
-// Formulare und Buttons
 input,
 button,
 textarea,
@@ -138,17 +44,15 @@ select {
 }
 
 button {
-    background-color: transparent;
+    background: none;
     border: none;
     cursor: pointer;
-    padding: 0;
 }
 
-// Links
 a {
     color: var(--color-secondary);
     text-decoration: none;
-    transition: color var(--transition-speed-fast) var(--transition-timing);
+    transition: color var(--transition-speed-fast);
 
     &:hover,
     &:focus {
@@ -157,50 +61,28 @@ a {
     }
 }
 
-// Liste
 ul,
 ol {
     list-style: none;
 }
 
-// Tabellen
 table {
     border-collapse: collapse;
-    border-spacing: 0;
 }
 
-// Verhindern von Textüberlauf
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    overflow-wrap: break-word;
-    hyphens: auto;
-}
-
-// Verbesserte Fokus-Stile für Barrierefreiheit
 :focus-visible {
     outline: 2px solid var(--color-secondary);
     outline-offset: 2px;
 }
 
-// Verstecken von Elementen
 [hidden] {
     display: none !important;
 }
 
-// Reduzieren von Animationen bei aktivierten Einstellungen
 @media (prefers-reduced-motion: reduce) {
-
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
+    * {
+        animation: none !important;
+        transition: none !important;
         scroll-behavior: auto !important;
     }
 }
